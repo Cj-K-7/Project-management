@@ -46,7 +46,7 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-input, select {
+input, select, textarea {
 	padding : 8px 10px;
 	border: none;
 	&:focus{
