@@ -1,25 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { DragDropContext } from "react-beautiful-dnd";
+import { ThemeProvider } from "styled-components";
+import GlobalStyled from "./styles/Global-styled";
+import { darkTheme, lightTheme } from "./styles/theme";
+import Form from "./components/Form";
+import { useRecoilValue } from "recoil";
+import { darkThemeAtom } from "./atoms";
 
 function App() {
+  const isDark = useRecoilValue(darkThemeAtom);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={ isDark ? darkTheme:lightTheme}>
+      <DragDropContext onDragEnd={()=>{}}>
+      <GlobalStyled/>
+      <Form/>
+      </DragDropContext>
+    </ThemeProvider>
   );
 }
 
