@@ -33,7 +33,7 @@ interface IDataAtom {
 }
 
 export const dataAtom = atom<IDataAtom>({
-  key: "AllProjects",
+  key: "allData",
   default: {
     New: [],
     Proceeding: [],

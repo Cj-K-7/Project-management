@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
-import { Departments, IForm, Priority } from "../atoms";
+import { useSetRecoilState } from "recoil";
+import { dataAtom, Departments, IForm, Priority } from "../atoms";
 import {
   FormBox,
   FormDoc,
@@ -18,6 +19,7 @@ import {
 } from "./FormComponents";
 
 function Form() {
+  const setData = useSetRecoilState(dataAtom);
   const {
     register,
     handleSubmit,
@@ -27,6 +29,9 @@ function Form() {
   
   const onSubmit = (data: IForm) => {
     data.id= Date.now();
+    setData((pre)=>{
+      return {...pre, ["New"]: [ data, ...pre["New"]]}
+    })
     setValue("title", "");
   };
 

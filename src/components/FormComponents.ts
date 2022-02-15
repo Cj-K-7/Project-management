@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const FormBox = styled.div`
+  max-width: 800px;
   margin: 20px;
   background-color: ${(props) => props.theme.BgColor_bold};
 `;
