@@ -1,25 +1,80 @@
 import { useForm } from "react-hook-form";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { dataAtom, Departments, formToggleAtom, IForm, Priority } from "../atoms";
-import {
-  FormBox,
-  FormDoc,
-  GridSystem,
-  Grid,
-  Grid_TA,
-  Title,
-  Subtitle,
-  Label,
-  Notice,
-  RequestTitleInput,
-  RequestorInput,
-  Select,
-  TextArea,
-  Btn,
-} from "./FormComponents";
+import { useSetRecoilState } from "recoil";
+import { dataAtom, Departments, IForm, Priority } from "../atoms";
+import styled from "styled-components";
+
+const FormDoc = styled.form`
+  position : absolute;
+  bottom : 30px;
+  right: 130px;
+  background-color: ${(props) => props.theme.BgColor_bold};
+  padding: 20px;
+  input:focus {
+    outline: ${(props) => props.theme.alertColor} solid 2px;
+  }
+`;
+const FormBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+`;
+const Title = styled.h1`
+  margin: 20px 0px 0px 20px;
+  font-size: 32px;
+`;
+const GridSystem = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr) 3fr;
+  grid-gap: 12px 18px;
+`;
+const Grid = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+const Grid_TA = styled.div`
+  grid-area: 3/1/4/3;
+  display: flex;
+  flex-direction: column;
+`;
+const Subtitle = styled.h2`
+  font-size: 24px;
+  margin: 12px 5px;
+`;
+const Label = styled.label`
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 5px;
+`;
+const Notice = styled.div`
+  align-self: flex-end;
+  font-size: 11px;
+  color: ${(props) => props.theme.alertColor};
+`;
+const RequestTitleInput = styled.input.attrs({
+  type: "text",
+})``;
+const RequestorInput = styled.input.attrs({
+  type: "text",
+})``;
+const Select = styled.select``;
+const TextArea = styled.textarea`
+  height: 100%;
+  border: none;
+  resize: none;
+`;
+const Btn = styled.input.attrs({
+  type: "submit",
+})`
+  width: fit-content;
+  align-self: flex-end;
+  padding: 10px 16px;
+  margin-top: 28px;
+`;
 
 function Form() {
-  const toggle = useRecoilValue(formToggleAtom);
   const setData = useSetRecoilState(dataAtom);
   const {
     register,
@@ -35,15 +90,11 @@ function Form() {
     });
     setValue("title", "");
   };
-  
-  if(!toggle){
-    return null;
-  }
 
   return (
-    <FormBox>
-      <Title>NEW PROJECT</Title>
-      <FormDoc onSubmit={handleSubmit(onSubmit)}>
+    <FormDoc onSubmit={handleSubmit(onSubmit)}>
+      <FormBox>
+        <Title>NEW PROJECT</Title>
         <Subtitle>ESSENTIALS</Subtitle>
         <GridSystem>
           <Grid>
@@ -106,8 +157,8 @@ function Form() {
           </Grid_TA>
         </GridSystem>
         <Btn value="SUBMIT" />
-      </FormDoc>
-    </FormBox>
+      </FormBox>
+    </FormDoc>
   );
 }
 

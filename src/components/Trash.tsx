@@ -2,7 +2,7 @@ import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 const DeleteUI = styled.div`
-  position: fixed;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;

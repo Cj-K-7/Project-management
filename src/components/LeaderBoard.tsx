@@ -1,46 +1,20 @@
 import React from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
-import { useRecoilState} from "recoil";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { dataAtom, formToggleAtom } from "../atoms";
+import { dataAtom } from "../atoms";
 import Board from "./Board";
 import Trash from "./Trash";
 
-const Container = styled.div`
+const BoardWrap = styled.div`
   margin-bottom: 25px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap : 16px 0px;
-`;
-const Toggle = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60px;
-  height: 60px;
-  bottom: 120px;
-  right: 40px;
-  border-radius: 50%;
-  box-shadow: 4px 4px 6px rgba(150, 150, 250, 0.15) inset;
-  &::after {
-    position: absolute;
-    content: "";
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    box-shadow: 3px 3px 5px rgba(60, 15, 15, 0.8);
-  }
-  &:hover {
-    background-color: rgba(100, 100, 255, 0.8);
-    box-shadow: 4px 4px 6px rgba(255, 255, 255, 0.3) inset;
-  }
-  background-color: rgba(100, 100, 255, 0.1);
+  grid-gap: 16px 0px;
 `;
 
 function LeaderBoard() {
   const [data, setData] = useRecoilState(dataAtom);
-  const [toggle, setToggle] = useRecoilState(formToggleAtom);
   const onDragEnd = (props: DropResult) => {
     console.log(props);
     const {
@@ -74,7 +48,7 @@ function LeaderBoard() {
           currentBoard.splice(index, 1);
           return {
             ...data,
-            [droppableId]: currentBoard
+            [droppableId]: currentBoard,
           };
         });
       } else if (destination.droppableId !== droppableId) {
@@ -90,27 +64,26 @@ function LeaderBoard() {
             [destination.droppableId]: targetBoard,
           };
         });
-      } 
+      }
     }
   };
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Trash />
       <Droppable
         type="LeadrBoard"
         droppableId="LeadrBoard"
         direction="horizontal"
       >
         {(props) => (
-          <Container ref={props.innerRef} {...props.droppableProps}>
+          <BoardWrap ref={props.innerRef} {...props.droppableProps}>
             {Object.keys(data).map((key, index) => (
               <Board key={key} data={data[key]} title={key} index={index} />
             ))}
             {props.placeholder}
-          </Container>
+          </BoardWrap>
         )}
       </Droppable>
-      <Toggle onClick={()=>setToggle((b)=>!b)}>{toggle ? "CLOSE" : "NEW"}</Toggle>
+      <Trash />
     </DragDropContext>
   );
 }
