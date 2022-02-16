@@ -1,6 +1,6 @@
 import { ThemeProvider } from "styled-components";
 import GlobalStyled from "./styles/Global-styled";
-import { darkTheme, lightTheme } from "./styles/theme";
+import { Theme } from "./styles/theme";
 import { useRecoilValue } from "recoil";
 import { darkThemeAtom, dataAtom } from "./atoms";
 import { useEffect } from "react";
@@ -15,7 +15,7 @@ function App() {
   }, [data]);
 
   return (
-    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+    <ThemeProvider theme={Theme}>
       <GlobalStyled />
       <Container/>
     </ThemeProvider>

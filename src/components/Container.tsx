@@ -8,6 +8,13 @@ import LeaderBoard from "./LeaderBoard";
 const Window = styled.div`
   padding: 20px;
   overflow: hidden;
+  form {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+  }
 `;
 
 function Container() {
@@ -15,13 +22,13 @@ function Container() {
   const [value, setValue] = useState("");
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setData((pre)=>{
-      return {...pre, [value] : []}
-    })
+    setData((pre) => {
+      return { ...pre, [value]: [] };
+    });
   };
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     const {
-      currentTarget : {value},
+      currentTarget: { value },
     } = event;
     setValue(value);
   };
@@ -29,7 +36,8 @@ function Container() {
   return (
     <Window>
       <form onSubmit={onSubmit}>
-        <input value={value} onChange={onChange} type="text" />
+        <input value={value} onChange={onChange} type="text" placeholder="Add New Category" />
+        <input type="submit" value="SUBMIT" />
       </form>
       <LeaderBoard />
       <Form />
