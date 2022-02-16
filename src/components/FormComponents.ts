@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
 export const FormBox = styled.div`
+  position : fixed;
   max-width: 800px;
-  margin: 20px;
+  bottom:20px;
+  right:140px;
+  opacity : 0.8;
   background-color: ${(props) => props.theme.BgColor_bold};
 `;
+
 export const FormDoc = styled.form`
   display: flex;
   flex-direction: column;

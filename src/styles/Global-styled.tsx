@@ -53,6 +53,10 @@ input, select, textarea {
 		outline: none;
 	};
 }
+@font-face {
+	font-family: 'Saira Condensed', sans-serif;;
+	src: url();
+}
 
 `;
 

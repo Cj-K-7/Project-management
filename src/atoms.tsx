@@ -28,16 +28,24 @@ export interface IForm {
   description: string;
 }
 
-interface IDataAtom {
+export interface IDataAtom {
   [key: string]: IForm[];
 }
 
+const localData = localStorage.getItem("projects")
+const JSONDATA = JSON.parse(localData as any)
+
 export const dataAtom = atom<IDataAtom>({
   key: "allData",
-  default: {
+  default: JSONDATA || {
     New: [],
     Proceeding: [],
     Delayed: [],
     Issue: [],
   },
 });
+
+export const formToggleAtom = atom({
+  key: "formToggle",
+  default : false
+})

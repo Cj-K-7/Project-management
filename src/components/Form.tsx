@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
-import { dataAtom, Departments, IForm, Priority } from "../atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { dataAtom, Departments, formToggleAtom, IForm, Priority } from "../atoms";
 import {
   FormBox,
   FormDoc,
@@ -19,6 +19,7 @@ import {
 } from "./FormComponents";
 
 function Form() {
+  const toggle = useRecoilValue(formToggleAtom);
   const setData = useSetRecoilState(dataAtom);
   const {
     register,
@@ -26,14 +27,18 @@ function Form() {
     setValue,
     formState: { errors },
   } = useForm<IForm>();
-  
+
   const onSubmit = (data: IForm) => {
-    data.id= Date.now();
-    setData((pre)=>{
-      return {...pre, ["New"]: [ data, ...pre["New"]]}
-    })
+    data.id = Date.now();
+    setData((pre) => {
+      return { ...pre, ["New"]: [data, ...pre["New"]] };
+    });
     setValue("title", "");
   };
+  
+  if(!toggle){
+    return null;
+  }
 
   return (
     <FormBox>
@@ -49,7 +54,7 @@ function Form() {
             <RequestTitleInput
               {...register("title", {
                 required: "no title...?",
-                maxLength: { value: 20, message: "20 letter or less" },
+                maxLength: { value: 16, message: "16 letter or less" },
               })}
             />
           </Grid>
