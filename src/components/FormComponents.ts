@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FormBox = styled.div`
-  position : fixed;
+  position : absolute;
   max-width: 800px;
   bottom:20px;
   right:140px;

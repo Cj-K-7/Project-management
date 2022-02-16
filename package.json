@@ -2,7 +2,7 @@
   "name": "workflow_tool",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/Cj-K-7/Project-management/",
+  "homepage": "https://cj-k-7.github.io/Project-management/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
